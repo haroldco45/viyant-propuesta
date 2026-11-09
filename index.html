@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Propuesta de app oficial para Viyant Beauty · Vibras Positivas HM</title>
+<meta name="description" content="Demo de propuesta de Vibras Positivas HM: una app oficial para que las clientas de Viyant Beauty compren solo en canales verificados. No es una tienda. No vende productos.">
+<meta name="theme-color" content="#3a1028">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Propuesta de app oficial · Vibras Positivas HM">
+<meta property="og:description" content="Demo de propuesta para Viyant Beauty. No es tienda oficial. No vende productos.">
+<meta property="og:image" content="vista-previa.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root{
+  --ink:#2a0d1e; --plum:#3a1028; --rose:#e2457a; --blush:#ffd9e4; --sugar:#fff6ee;
+  --gold:#f2b84b; --cream:#fffaf5; --muted:#7a5868; --line:rgba(58,16,40,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.1;letter-spacing:-.01em}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* Aviso fijo */
+.notice{background:var(--gold);color:#3b2500;font-size:.82rem;font-weight:700;text-align:center;padding:8px 14px;position:sticky;top:0;z-index:50;letter-spacing:.02em}
+
+/* Barra */
+.bar{position:sticky;top:34px;z-index:40;background:rgba(58,16,40,.92);backdrop-filter:blur(8px);color:#fff}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:54px;gap:12px}
+.brand{font-family:Georgia,serif;font-size:1.05rem;letter-spacing:.04em}
+.brand small{display:block;font-family:"Segoe UI",system-ui,sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+.lang{display:flex;border:1px solid rgba(255,255,255,.35);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;color:#fff;font-weight:700;font-size:.78rem;padding:7px 14px;cursor:pointer;letter-spacing:.08em}
+.lang button.on{background:#fff;color:var(--plum)}
+
+/* Portada */
+.hero{position:relative;color:#fff;padding:74px 0 92px;overflow:hidden;
+  background:linear-gradient(120deg,#3a1028,#8c1f52,#e2457a,#f2b84b,#8c1f52,#3a1028);background-size:400% 400%;animation:flow 16s ease infinite}
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.55) 1px,transparent 1.4px);background-size:22px 22px;animation:fall 14s linear infinite}
+@keyframes fall{to{background-position:0 220px}}
+.hero .wrap{position:relative}
+.kicker{display:inline-block;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700;border:1px solid rgba(255,255,255,.6);padding:6px 14px;border-radius:999px;margin-bottom:22px}
+.hero h1{font-size:clamp(2.3rem,7vw,4.6rem);max-width:15ch}
+.hero h1 em{font-style:italic;color:#ffe9b8}
+.hero p{max-width:54ch;margin-top:18px;font-size:1.08rem;opacity:.95}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-block;text-decoration:none;font-weight:800;font-size:.95rem;padding:14px 24px;border-radius:999px;border:2px solid #fff;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.25)}
+.btn.solid{background:#fff;color:var(--plum)}
+.btn.ghost{background:transparent;color:#fff}
+.btn.dark{background:var(--plum);color:#fff;border-color:var(--plum)}
+
+/* Cinta en movimiento */
+.ticker{background:var(--plum);color:var(--blush);overflow:hidden;white-space:nowrap;font-weight:700;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;padding:13px 0}
+.ticker div{display:inline-block;animation:slide 26s linear infinite}
+.ticker span{margin:0 26px}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:76px 0}
+.eyebrow{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:800;color:var(--rose);margin-bottom:10px}
+h2{font-size:clamp(1.8rem,4.4vw,2.8rem);max-width:20ch}
+.lead{color:var(--muted);max-width:60ch;margin-top:14px;font-size:1.04rem}
+
+/* Aparecer al bajar */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+/* Problema */
+.problem{background:var(--sugar)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:36px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(58,16,40,.12)}
+.num{font-family:Georgia,serif;font-size:2.4rem;color:var(--rose);line-height:1}
+.card h3{font-size:1.2rem;margin:10px 0 8px}
+.card p{color:var(--muted);font-size:.96rem}
+
+/* Producto */
+.product{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center;margin-top:36px}
+.slot{position:relative;border-radius:24px;border:2px dashed rgba(226,69,122,.55);background:linear-gradient(135deg,#ffe6ee,#fff3df,#ffe6ee);background-size:200% 200%;animation:flow 9s ease infinite;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--plum);font-weight:700;min-height:220px}
+.slot small{display:block;font-weight:500;color:var(--muted);margin-top:6px;font-size:.84rem}
+.slot.tall{aspect-ratio:4/5}
+.slot.video{aspect-ratio:9/16;max-height:420px}
+.tag{display:inline-block;background:var(--blush);color:var(--plum);font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.product h3{font-size:2rem}
+.product p{color:var(--muted);margin-top:12px}
+.pending{margin-top:18px;border-left:4px solid var(--gold);background:#fff8e6;padding:14px 16px;border-radius:0 12px 12px 0;font-size:.92rem;color:#5a4100}
+
+/* Verificación */
+.verify{background:var(--plum);color:#fff}
+.verify .eyebrow{color:var(--gold)}
+.verify .lead{color:rgba(255,255,255,.78)}
+.vbox{margin-top:34px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-radius:24px;padding:28px}
+.vbox label{display:block;font-weight:700;margin-bottom:10px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row input{flex:1;min-width:220px;padding:14px 16px;border-radius:14px;border:0;font-size:1rem}
+.result{margin-top:16px;padding:16px;border-radius:14px;font-weight:700;display:none}
+.result.ok{display:block;background:#dff7e6;color:#0e5a2a}
+.result.bad{display:block;background:#ffe1e1;color:#8a1010}
+.fine{font-size:.82rem;opacity:.7;margin-top:12px}
+
+/* Galería */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:36px}
+
+/* Pasos */
+.steps{counter-reset:s;display:grid;gap:14px;margin-top:34px}
+.step{counter-increment:s;display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.step:before{content:counter(s,decimal-leading-zero);font-family:Georgia,serif;font-size:1.9rem;color:var(--rose)}
+.step h3{font-size:1.12rem;margin-bottom:4px}
+.step p{color:var(--muted);font-size:.95rem}
+
+/* Canales */
+.channels{background:var(--sugar)}
+.chan{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:34px}
+.chan a{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;transition:transform .25s,box-shadow .25s,border-color .25s}
+.chan a:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(58,16,40,.12);border-color:var(--rose)}
+.chan b{display:block;font-family:Georgia,serif;font-size:1.25rem}
+.chan span{color:var(--muted);font-size:.9rem}
+.chan i{display:block;font-style:normal;margin-top:14px;font-weight:800;color:var(--rose);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase}
+
+/* Oferta */
+.offer{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:start;margin-top:34px}
+.list{list-style:none;display:grid;gap:12px}
+.list li{padding:14px 16px 14px 18px;border-left:4px solid var(--rose);background:#fff;border-radius:0 14px 14px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.contact{background:linear-gradient(140deg,#3a1028,#8c1f52);color:#fff;border-radius:24px;padding:30px}
+.contact h3{font-size:1.5rem}
+.contact p{opacity:.88;margin:10px 0 20px}
+.contact .btn{width:100%;text-align:center;margin-top:10px}
+
+footer{background:var(--ink);color:rgba(255,255,255,.75);padding:36px 0;font-size:.84rem}
+footer b{color:#fff}
+footer p+p{margin-top:8px}
+
+@media(max-width:760px){
+  .product,.offer{grid-template-columns:1fr}
+  section{padding:58px 0}
+  .hero{padding:56px 0 70px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="notice" data-es="DEMO DE PROPUESTA · No es tienda oficial · Aquí no se vende ningún producto" data-en="PROPOSAL DEMO · Not an official store · Nothing is sold here">DEMO DE PROPUESTA · No es tienda oficial · Aquí no se vende ningún producto</div>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="brand">Vibras Positivas HM<small data-es="Propuesta para Viyant Beauty" data-en="Proposal for Viyant Beauty">Propuesta para Viyant Beauty</small></div>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button id="bES" class="on" onclick="setLang('es')">ES</button>
+      <button id="bEN" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="grain"></div>
+  <div class="wrap">
+    <span class="kicker" data-es="Idea de app · 9 de noviembre de 2026" data-en="App concept · November 9, 2026">Idea de app · 9 de noviembre de 2026</span>
+    <h1 data-es="Tu marca en una app. <em>Tus clientas, lejos de las copias.</em>" data-en="Your brand in one app. <em>Your customers, far from the fakes.</em>">Tu marca en una app. <em>Tus clientas, lejos de las copias.</em></h1>
+    <p data-es="Itati: tú misma has avisado que hay negocios vendiendo un “Azúcar Glow” que no es el tuyo. Esta es una muestra de cómo una app propia puede llevar a cada seguidora directo a tus canales oficiales, en español y en inglés." data-en="Itati: you have warned your followers about businesses selling an “Azúcar Glow” that is not yours. This is a sample of how your own app can take every follower straight to your official channels, in Spanish and in English.">Itati: tú misma has avisado que hay negocios vendiendo un “Azúcar Glow” que no es el tuyo. Esta es una muestra de cómo una app propia puede llevar a cada seguidora directo a tus canales oficiales, en español y en inglés.</p>
+    <div class="cta">
+      <a class="btn solid" href="#verificar" data-es="Ver la idea principal" data-en="See the main idea">Ver la idea principal</a>
+      <a class="btn ghost" href="#contacto" data-es="Hablar con Harold" data-en="Talk to Harold">Hablar con Harold</a>
+    </div>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true"><div>
+  <span data-es="Solo canales oficiales" data-en="Official channels only">Solo canales oficiales</span><span>·</span>
+  <span data-es="Español e inglés" data-en="Spanish and English">Español e inglés</span><span>·</span>
+  <span data-es="Se instala en el celular" data-en="Installs on the phone">Se instala en el celular</span><span>·</span>
+  <span data-es="Tus fotos y tus videos" data-en="Your photos and your videos">Tus fotos y tus videos</span><span>·</span>
+  <span data-es="Solo canales oficiales" data-en="Official channels only">Solo canales oficiales</span><span>·</span>
+  <span data-es="Español e inglés" data-en="Spanish and English">Español e inglés</span><span>·</span>
+  <span data-es="Se instala en el celular" data-en="Installs on the phone">Se instala en el celular</span><span>·</span>
+  <span data-es="Tus fotos y tus videos" data-en="Your photos and your videos">Tus fotos y tus videos</span><span>·</span>
+</div></div>
+
+<section class="problem">
+  <div class="wrap">
+    <p class="eyebrow rv" data-es="El problema" data-en="The problem">El problema</p>
+    <h2 class="rv" data-es="Tu producto es viral. Las copias también." data-en="Your product is viral. So are the fakes.">Tu producto es viral. Las copias también.</h2>
+    <p class="lead rv" data-es="Cuando un producto se vuelve tan conocido, aparecen páginas que usan su nombre y sus fotos. La clienta no siempre sabe cuál es la verdadera." data-en="When a product gets this well known, pages show up using its name and its photos. A customer cannot always tell which one is real.">Cuando un producto se vuelve tan conocido, aparecen páginas que usan su nombre y sus fotos. La clienta no siempre sabe cuál es la verdadera.</p>
+    <div class="cols">
+      <div class="card rv"><div class="num">01</div><h3 data-es="Un solo lugar verdadero" data-en="One true place">Un solo lugar verdadero</h3><p data-es="La app es tuya y lleva tu nombre. Todo botón de compra abre tus canales oficiales, nada más." data-en="The app is yours and carries your name. Every buy button opens your official channels, nothing else.">La app es tuya y lleva tu nombre. Todo botón de compra abre tus canales oficiales, nada más.</p></div>
+      <div class="card rv"><div class="num">02</div><h3 data-es="Verificador de vendedores" data-en="Seller checker">Verificador de vendedores</h3><p data-es="La clienta pega el enlace o la cuenta donde piensa comprar y la app le dice si es oficial." data-en="A customer pastes the link or account she plans to buy from and the app tells her if it is official.">La clienta pega el enlace o la cuenta donde piensa comprar y la app le dice si es oficial.</p></div>
+      <div class="card rv"><div class="num">03</div><h3 data-es="Dos idiomas" data-en="Two languages">Dos idiomas</h3><p data-es="Tu público habla español e inglés. La app cambia de idioma con un toque, como esta muestra." data-en="Your audience speaks Spanish and English. The app switches language with one tap, like this sample.">Tu público habla español e inglés. La app cambia de idioma con un toque, como esta muestra.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow rv" data-es="Así se vería un producto" data-en="How a product would look">Así se vería un producto</p>
+    <h2 class="rv" data-es="Cada producto con su propia página" data-en="Each product with its own page">Cada producto con su propia página</h2>
+    <div class="product">
+      <div class="slot tall rv"><div><span data-es="Aquí va tu foto oficial del producto" data-en="Your official product photo goes here">Aquí va tu foto oficial del producto</span><small data-es="La pones tú. Esta muestra no usa ninguna imagen tuya." data-en="You provide it. This sample uses none of your images.">La pones tú. Esta muestra no usa ninguna imagen tuya.</small></div></div>
+      <div class="rv">
+        <span class="tag" data-es="Exfoliante de azúcar" data-en="Sugar scrub">Exfoliante de azúcar</span>
+        <h3>Azúcar Glow</h3>
+        <p data-es="Espacio para la descripción oficial, con tus palabras: qué es, para qué tipo de piel y cómo lo recomiendas." data-en="Room for the official description, in your words: what it is, which skin types it suits and how you recommend it.">Espacio para la descripción oficial, con tus palabras: qué es, para qué tipo de piel y cómo lo recomiendas.</p>
+        <div class="pending" data-es="Precio, ingredientes, modo de uso y advertencias los define la marca. En esta muestra no se inventa ninguno." data-en="Price, ingredients, directions and warnings are set by the brand. This sample makes none of them up.">Precio, ingredientes, modo de uso y advertencias los define la marca. En esta muestra no se inventa ninguno.</div>
+        <div class="cta"><a class="btn dark" href="#canales" data-es="Comprar en canal oficial" data-en="Buy on official channel">Comprar en canal oficial</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="verify" id="verificar">
+  <div class="wrap">
+    <p class="eyebrow rv" data-es="La idea principal" data-en="The main idea">La idea principal</p>
+    <h2 class="rv" data-es="¿Es oficial donde voy a comprar?" data-en="Is the place I am buying from official?">¿Es oficial donde voy a comprar?</h2>
+    <p class="lead rv" data-es="Pruébalo: escribe una cuenta o pega un enlace. En la app real, la lista de canales oficiales la manejas tú." data-en="Try it: type an account or paste a link. In the real app, you manage the list of official channels.">Pruébalo: escribe una cuenta o pega un enlace. En la app real, la lista de canales oficiales la manejas tú.</p>
+    <div class="vbox rv">
+      <label for="q" data-es="Cuenta o enlace del vendedor" data-en="Seller account or link">Cuenta o enlace del vendedor</label>
+      <div class="row">
+        <input id="q" type="text" placeholder="@viyant.beauty" autocomplete="off">
+        <button class="btn solid" onclick="check()" data-es="Verificar" data-en="Check">Verificar</button>
+      </div>
+      <div id="res" class="result" role="status"></div>
+      <p class="fine" data-es="Lista de esta muestra: @viyant.beauty y @itatilopez_ en TikTok. Es solo un ejemplo de funcionamiento." data-en="List in this sample: @viyant.beauty and @itatilopez_ on TikTok. This only shows how it works.">Lista de esta muestra: @viyant.beauty y @itatilopez_ en TikTok. Es solo un ejemplo de funcionamiento.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow rv" data-es="Contenido real" data-en="Real content">Contenido real</p>
+    <h2 class="rv" data-es="Tus fotos y tus videos, sin dibujitos" data-en="Your photos and your videos, no cartoons">Tus fotos y tus videos, sin dibujitos</h2>
+    <p class="lead rv" data-es="La app se arma con el material que tú entregues: fotos del producto, videos de cómo usarlo y reseñas reales de clientas con su permiso." data-en="The app is built with the material you hand over: product photos, how-to videos and real customer reviews with their permission.">La app se arma con el material que tú entregues: fotos del producto, videos de cómo usarlo y reseñas reales de clientas con su permiso.</p>
+    <div class="gallery">
+      <div class="slot video rv"><div><span data-es="Tu video: cómo se usa" data-en="Your video: how to use it">Tu video: cómo se usa</span></div></div>
+      <div class="slot video rv"><div><span data-es="Tu video: antes de comprar" data-en="Your video: before you buy">Tu video: antes de comprar</span></div></div>
+      <div class="slot video rv"><div><span data-es="Reseña real de una clienta" data-en="A real customer review">Reseña real de una clienta</span><small data-es="Con su permiso" data-en="With her permission">Con su permiso</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="wrap">
+    <p class="eyebrow rv" data-es="Cómo trabajaríamos" data-en="How we would work">Cómo trabajaríamos</p>
+    <h2 class="rv" data-es="Cuatro pasos y queda publicada" data-en="Four steps and it is live">Cuatro pasos y queda publicada</h2>
+    <div class="steps">
+      <div class="step rv"><div><h3 data-es="Tú autorizas" data-en="You approve">Tú autorizas</h3><p data-es="Nada se publica con tu nombre ni tu marca sin tu permiso por escrito." data-en="Nothing is published with your name or brand without your written permission.">Nada se publica con tu nombre ni tu marca sin tu permiso por escrito.</p></div></div>
+      <div class="step rv"><div><h3 data-es="Tú entregas el material" data-en="You send the material">Tú entregas el material</h3><p data-es="Fotos, videos, textos, precios y la lista de canales oficiales." data-en="Photos, videos, copy, prices and the list of official channels.">Fotos, videos, textos, precios y la lista de canales oficiales.</p></div></div>
+      <div class="step rv"><div><h3 data-es="Yo construyo" data-en="I build">Yo construyo</h3><p data-es="App instalable en el celular, en español e inglés, con el verificador de vendedores." data-en="An app that installs on the phone, in Spanish and English, with the seller checker.">App instalable en el celular, en español e inglés, con el verificador de vendedores.</p></div></div>
+      <div class="step rv"><div><h3 data-es="Tú decides" data-en="You decide">Tú decides</h3><p data-es="La revisas, pides cambios y se publica solo cuando estés conforme." data-en="You review it, ask for changes and it goes live only when you are happy.">La revisas, pides cambios y se publica solo cuando estés conforme.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="channels" id="canales">
+  <div class="wrap">
+    <p class="eyebrow rv" data-es="Canales de la marca" data-en="Brand channels">Canales de la marca</p>
+    <h2 class="rv" data-es="Esta muestra no vende. Te lleva a ellos." data-en="This sample sells nothing. It sends you to them.">Esta muestra no vende. Te lleva a ellos.</h2>
+    <div class="chan">
+      <a class="rv" href="https://www.tiktok.com/@viyant.beauty" target="_blank" rel="noopener"><b>@viyant.beauty</b><span>TikTok</span><i data-es="Abrir perfil" data-en="Open profile">Abrir perfil</i></a>
+      <a class="rv" href="https://www.tiktok.com/@itatilopez_" target="_blank" rel="noopener"><b>@itatilopez_</b><span>TikTok</span><i data-es="Abrir perfil" data-en="Open profile">Abrir perfil</i></a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <p class="eyebrow rv" data-es="Quién propone" data-en="Who is proposing">Quién propone</p>
+    <h2 class="rv" data-es="Vibras Positivas HM, desde Colombia" data-en="Vibras Positivas HM, from Colombia">Vibras Positivas HM, desde Colombia</h2>
+    <div class="offer">
+      <ul class="list rv">
+        <li data-es="Soy Harold Marín. Hago apps para negocios y emprendedores desde Caucasia, Antioquia." data-en="I am Harold Marín. I build apps for businesses and entrepreneurs from Caucasia, Antioquia.">Soy Harold Marín. Hago apps para negocios y emprendedores desde Caucasia, Antioquia.</li>
+        <li data-es="No vendo ni revendo productos de Viyant Beauty. Solo ofrezco hacer la app." data-en="I do not sell or resell Viyant Beauty products. I am only offering to build the app.">No vendo ni revendo productos de Viyant Beauty. Solo ofrezco hacer la app.</li>
+        <li data-es="Esta muestra no usa fotos, videos ni logotipos de la marca." data-en="This sample uses no photos, videos or logos from the brand.">Esta muestra no usa fotos, videos ni logotipos de la marca.</li>
+        <li data-es="Si la idea no te interesa, la muestra se retira." data-en="If the idea is not for you, the sample comes down.">Si la idea no te interesa, la muestra se retira.</li>
+      </ul>
+      <div class="contact rv">
+        <h3 data-es="¿Hablamos?" data-en="Shall we talk?">¿Hablamos?</h3>
+        <p data-es="Escríbeme por WhatsApp y te cuento cómo quedaría con tu material." data-en="Message me on WhatsApp and I will show you how it would look with your material.">Escríbeme por WhatsApp y te cuento cómo quedaría con tu material.</p>
+        <a class="btn solid" id="wa" href="https://wa.me/573117700431" target="_blank" rel="noopener">WhatsApp +57 311 770 0431</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Vibras Positivas HM</b> · Caucasia, Antioquia, Colombia</p>
+    <p data-es="Demo de propuesta independiente. No es un sitio de Viyant Beauty ni de Itati López, no está afiliada ni autorizada por ellas y no vende productos. Los nombres de marca pertenecen a sus dueños." data-en="Independent proposal demo. This is not a Viyant Beauty or Itati López site, is not affiliated with or endorsed by them and sells no products. Brand names belong to their owners.">Demo de propuesta independiente. No es un sitio de Viyant Beauty ni de Itati López, no está afiliada ni autorizada por ellas y no vende productos. Los nombres de marca pertenecen a sus dueños.</p>
+  </div>
+</footer>
+
+<script>
+var lang='es';
+var OFFICIAL=['viyant.beauty','itatilopez_'];
+var WA={es:'Hola Harold, vi la propuesta de app para Viyant Beauty.',en:'Hi Harold, I saw the app proposal for Viyant Beauty.'};
+function setLang(l){
+  lang=l;document.documentElement.lang=l;
+  var els=document.querySelectorAll('[data-es]');
+  for(var i=0;i<els.length;i++){els[i].innerHTML=els[i].getAttribute('data-'+l);}
+  document.getElementById('bES').className=l==='es'?'on':'';
+  document.getElementById('bEN').className=l==='en'?'on':'';
+  document.getElementById('wa').href='https://wa.me/573117700431?text='+encodeURIComponent(WA[l]);
+  document.title=l==='es'?'Propuesta de app oficial para Viyant Beauty · Vibras Positivas HM':'Official app proposal for Viyant Beauty · Vibras Positivas HM';
+  var r=document.getElementById('res');r.className='result';r.textContent='';
+  try{localStorage.setItem('vp-lang',l);}catch(e){}
+}
+function check(){
+  var v=document.getElementById('q').value.trim().toLowerCase();
+  var r=document.getElementById('res');
+  if(!v){r.className='result';return;}
+  var m=v.match(/@([a-z0-9._]+)/);
+  var handle=m?m[1]:v.replace(/^https?:\/\//,'').replace(/\/+$/,'');
+  var ok=OFFICIAL.indexOf(handle)>-1;
+  r.className='result '+(ok?'ok':'bad');
+  r.textContent=ok
+    ?(lang==='es'?'Canal oficial. Puedes comprar con tranquilidad.':'Official channel. You can buy with confidence.')
+    :(lang==='es'?'No está en la lista de canales oficiales. Mejor no compres ahí.':'Not on the list of official channels. Better not to buy there.');
+}
+document.getElementById('q').addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+try{var s=localStorage.getItem('vp-lang');if(s==='en')setLang('en');else setLang('es');}catch(e){setLang('es');}
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=(i%3)*90+'ms';io.observe(el);});
+}else{document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in');});}
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+</script>
+</body>
+</html>
